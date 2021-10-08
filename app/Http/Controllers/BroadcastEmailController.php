@@ -35,7 +35,7 @@ class BroadcastEmailController extends Controller
         $email_template = TemplateEmail::where('id',$id)->first();
 
         $details = [
-            'subject' => 'Promotion',
+            'subject' => '[LIMITED TIME] Free 100 USDT only for you from AiGate',
             'title' => $email_template->title,
             'description' => $email_template->description,
             'banner' => $email_template->banner,
