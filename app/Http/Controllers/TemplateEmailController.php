@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Storage;
 class TemplateEmailController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
+
     public function index(){
         $template_email = TemplateEmail::all();
 

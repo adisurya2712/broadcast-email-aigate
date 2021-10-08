@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ImportTableSeeder::class,
             TemplateEmailTableSeeder::class,
+            UserSeeder::class
         ]);
     }
 }

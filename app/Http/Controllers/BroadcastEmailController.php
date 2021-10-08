@@ -13,6 +13,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class BroadcastEmailController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
+
     public function index(){
         $kontal_email = VerifiedEmail::all();
 
