@@ -38,7 +38,7 @@ class SendQueueEmail implements ShouldQueue
      */
     public function handle()
     {
-        $data = VerifiedEmail::limit(1)->get();
+        $data = VerifiedEmail::get();
         $input['subject'] = $this->details['subject'];
         $title = $this->details['title'];
         $description = $this->details['description'];
@@ -48,12 +48,7 @@ class SendQueueEmail implements ShouldQueue
 
 
         foreach ($data as $key => $value) {
-            $input['email'] = $value->email;
-            $input['name'] = "adi";
-            \Mail::send('EmailTemplate.Template1', ['title'=>$title,'description'=>$description,'banner'=>$banner,'voucher'=>$voucher,'link'=>$link], function($message) use($input){
-                $message->to($input['email'], $input['name'])
-                    ->subject($input['subject']);
-            });
+            dispatch(new SendEmail($value, $title, $description, $banner, $voucher, $link));
         }
     }
 }
