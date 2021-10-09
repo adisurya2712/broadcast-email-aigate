@@ -44,13 +44,11 @@ class BroadcastEmailController extends Controller
 
         ];
 
-        $job = (new \App\Jobs\SendQueueEmail($details))
-            ->delay(now()->addSeconds(2));
+        $job = (new \App\Jobs\SendQueueEmail($details));
 
         dispatch($job);
         Alert::success('Broadcast Email Success', 'Success Message');
         return redirect(url('/jobs'));
     }
-
 
 }
