@@ -24,7 +24,7 @@ class SendQueueEmail implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param $details
      */
     public function __construct($details)
     {
@@ -38,8 +38,8 @@ class SendQueueEmail implements ShouldQueue
      */
     public function handle()
     {
-        $data = VerifiedEmail::get();
-        $input['subject'] = $this->details['subject'];
+        $data = VerifiedEmail::all()->toArray();
+        $subject = $this->details['subject'];
         $title = $this->details['title'];
         $description = $this->details['description'];
         $banner = $this->details['banner'];
@@ -47,8 +47,8 @@ class SendQueueEmail implements ShouldQueue
         $link = $this->details['link'];
 
 
-        foreach ($data as $key => $value) {
-            dispatch(new SendEmail($value, $this->details['subject'], $title, $description, $banner, $voucher, $link));
+        foreach ($data as $item) {
+            dispatch(new SendEmail($item['email'], $subject, $title, $description, $banner, $voucher, $link));
         }
     }
 }

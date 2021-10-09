@@ -13,7 +13,7 @@ class SendEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $value;
+    private $target;
     private $title;
     private $description;
     private $banner;
@@ -24,7 +24,7 @@ class SendEmail implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param $value
+     * @param $target
      * @param $subject
      * @param $title
      * @param $description
@@ -32,9 +32,9 @@ class SendEmail implements ShouldQueue
      * @param $voucher
      * @param $link
      */
-    public function __construct($value, $subject, $title, $description, $banner, $voucher, $link)
+    public function __construct($target, $subject, $title, $description, $banner, $voucher, $link)
     {
-        $this->value = $value;
+        $this->target = $target;
         $this->title = $title;
         $this->description = $description;
         $this->banner = $banner;
@@ -50,10 +50,9 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        $input['email'] = $this->value->email;
-        $input['name'] = $this->value->email;
-        \Mail::send('EmailTemplate.Template1', ['title'=>$this->title,'description'=>$this->description,'banner'=>$this->banner,'voucher'=>$this->voucher,'link'=>$this->link], function($message) use($input){
-            $message->to($input['email'], $input['name'])
+        $target = $this->target;
+        \Mail::send('EmailTemplate.Template1', ['title'=>$this->title,'description'=>$this->description,'banner'=>$this->banner,'voucher'=>$this->voucher,'link'=>$this->link], function($message) use($target){
+            $message->to($target, 'Someone')
                 ->subject($this->subject);
         });
     }
