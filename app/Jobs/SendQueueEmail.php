@@ -50,7 +50,7 @@ class SendQueueEmail implements ShouldQueue
         foreach ($data as $item) {
             Broadcast::create([
                 'target'=>$item['email'],
-                'template_email_id'=>$this->details->id,
+                'template_email_id'=>$this->details['id'],
                 'status'=>0,
             ]);
 //            $job = (new SendEmail($item['email'], $subject, $title, $description, $banner, $voucher, $link))->delay(60);
