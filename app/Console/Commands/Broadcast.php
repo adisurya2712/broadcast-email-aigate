@@ -47,9 +47,11 @@ class Broadcast extends Command
             $voucher = $email->template_email->voucher;
             $link = $email->template_email->link;
 
-            echo $title.PHP_EOL;
-//            $job = (new SendEmail($email->target, $subject, $title, $description, $banner, $voucher, $link));
-//            dispatch($job);
+            echo $email->target.' => send'.PHP_EOL;
+            $job = (new SendEmail($email->target, $subject, $title, $description, $banner, $voucher, $link));
+            dispatch($job);
+            $email->status = 1;
+            $email->save();
         }
     }
 }
