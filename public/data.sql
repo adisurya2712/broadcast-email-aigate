@@ -25,8 +25,8 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `verified_emails` (`id`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'adikolok6@gmail.com', '2021-09-30 04:35:15', '2021-09-30 04:36:09'),
-(2, 'fika@gmail.com', '2021-09-30 04:38:44', '2021-09-30 04:38:44'),
+(1, 'mail.coffejava@gmail.com', NULL, NULL),
+(2, 'ijlikadi@gmail.com', NULL, NULL),
 (3, 'mesinbitcoin@gmail.com', NULL, NULL),
 (4, 'hendrik77ct@gmail.com', NULL, NULL),
 (5, 'akiddcode@gmail.com', NULL, NULL),
@@ -68279,12 +68279,6 @@ INSERT INTO `verified_emails` (`id`, `email`, `created_at`, `updated_at`) VALUES
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `verified_emails`
---
-ALTER TABLE `verified_emails`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
