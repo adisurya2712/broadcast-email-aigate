@@ -48,7 +48,7 @@ class SendQueueEmail implements ShouldQueue
 
 
         foreach ($data as $key => $value) {
-            dispatch(new SendEmail($value, $title, $description, $banner, $voucher, $link));
+            dispatch(new SendEmail($value, $this->details['subject'], $title, $description, $banner, $voucher, $link));
         }
     }
 }

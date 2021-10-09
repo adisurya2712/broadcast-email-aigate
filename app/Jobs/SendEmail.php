@@ -19,13 +19,20 @@ class SendEmail implements ShouldQueue
     private $banner;
     private $voucher;
     private $link;
+    private $subject;
 
     /**
      * Create a new job instance.
      *
      * @param $value
+     * @param $subject
+     * @param $title
+     * @param $description
+     * @param $banner
+     * @param $voucher
+     * @param $link
      */
-    public function __construct($value, $title, $description, $banner, $voucher, $link)
+    public function __construct($value, $subject, $title, $description, $banner, $voucher, $link)
     {
         $this->value = $value;
         $this->title = $title;
@@ -33,6 +40,7 @@ class SendEmail implements ShouldQueue
         $this->banner = $banner;
         $this->voucher = $voucher;
         $this->link = $link;
+        $this->subject = $subject;
     }
 
     /**
@@ -46,7 +54,7 @@ class SendEmail implements ShouldQueue
         $input['name'] = $this->value->email;
         \Mail::send('EmailTemplate.Template1', ['title'=>$this->title,'description'=>$this->description,'banner'=>$this->banner,'voucher'=>$this->voucher,'link'=>$this->link], function($message) use($input){
             $message->to($input['email'], $input['name'])
-                ->subject($input['subject']);
+                ->subject($this->subject);
         });
     }
 }
