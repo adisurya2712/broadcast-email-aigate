@@ -38,7 +38,7 @@ class Broadcast extends Command
      */
     public function handle()
     {
-        $emails = \App\Models\Broadcast::where('status',0)->with('template_email')->get()->take(60);
+        $emails = \App\Models\Broadcast::where('status',0)->with('template_email')->get()->take(5);
         foreach ($emails as $email){
             $subject = '[LIMITED TIME] Free 100 USDT only for you';
             $title = $email->template_email->title;
