@@ -41,7 +41,7 @@ class BroadcastEmailController extends Controller
             'banner' => $email_template->banner,
             'voucher' => $email_template->voucher,
             'link' => $email_template->link,
-
+            'id'=>$email_template->id
         ];
 
         $job = (new \App\Jobs\SendQueueEmail($details));

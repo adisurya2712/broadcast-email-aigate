@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Broadcast;
 use App\Models\VerifiedEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -46,10 +47,14 @@ class SendQueueEmail implements ShouldQueue
         $voucher = $this->details['voucher'];
         $link = $this->details['link'];
 
-
         foreach ($data as $item) {
-            $job = (new SendEmail($item['email'], $subject, $title, $description, $banner, $voucher, $link))->delay(60);
-            dispatch($job);
+            Broadcast::create([
+                'target'=>$item['email'],
+                'template_email_id'=>$this->details->id,
+                'status'=>0,
+            ]);
+//            $job = (new SendEmail($item['email'], $subject, $title, $description, $banner, $voucher, $link))->delay(60);
+//            dispatch($job);
         }
     }
 }
