@@ -48,7 +48,8 @@ class SendQueueEmail implements ShouldQueue
 
 
         foreach ($data as $item) {
-            dispatch(new SendEmail($item['email'], $subject, $title, $description, $banner, $voucher, $link))->delay(60);
+            $job = (new SendEmail($item['email'], $subject, $title, $description, $banner, $voucher, $link))->delay(60);
+            dispatch($job);
         }
     }
 }
